@@ -1,6 +1,6 @@
 package lab06;
 
-public class Jogo {
+public abstract class Jogo {
 	private String nome;
 	private double preco;
 	private int maiorScore;
@@ -15,16 +15,38 @@ public class Jogo {
 		this.qtdZeradas = 0;
 	}
 	
-	public int registraJogada(int pontuacao, boolean zerou) {
-		if(this.maiorScore < pontuacao) {
-			this.maiorScore = pontuacao;
-		}
-		if(zerou) {
-			this.qtdZeradas++;
-		}
-		
-		this.qtdJogadas++;
-		
-		return x2p;
+	public abstract int registraJogada(int pontuacao, boolean zerou);
+	
+	public double getPreco() {
+		return this.preco;
 	}
+
+	public int getMaiorScore() {
+		return maiorScore;
+	}
+
+	public void setMaiorScore(int maiorScore) {
+		this.maiorScore = maiorScore;
+	}
+
+	public int getQtdJogadas() {
+		return qtdJogadas;
+	}
+
+	public void aumentaQtdJogadas() {
+		this.qtdJogadas++;
+	}
+
+	public int getQtdZeradas() {
+		return qtdZeradas;
+	}
+
+	public void aumentaQtdZeradas() {
+		this.qtdZeradas++;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+	
 }
