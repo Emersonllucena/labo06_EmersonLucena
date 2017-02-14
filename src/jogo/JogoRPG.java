@@ -1,4 +1,4 @@
-package lab06;
+package jogo;
 
 public class JogoRPG extends Jogo {
 	
@@ -18,5 +18,10 @@ public class JogoRPG extends Jogo {
 		this.aumentaQtdJogadas();
 		
 		return 10;
+	}
+	
+	@Override
+	public String toString() {
+		return infoJogo("RPG");
 	}
 }

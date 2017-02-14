@@ -1,4 +1,4 @@
-package lab06;
+package jogo;
 
 public enum Jogabilidade {
 	ONLINE,

@@ -1,8 +1,8 @@
-package lab06;
+package jogo;
 
-public class JogoLuta extends Jogo {
+public class JogoPlataforma extends Jogo {
 	
-	public JogoLuta(String nome, double preco) {
+	public JogoPlataforma(String nome, double preco) {
 		super(nome, preco);
 	}
 
@@ -10,14 +10,19 @@ public class JogoLuta extends Jogo {
 	public int registraJogada(int pontuacao, boolean zerou) {
 		if(this.getMaiorScore() < pontuacao) {
 			this.setMaiorScore(pontuacao);
-			return this.getMaiorScore() / 1000;
 		}
 		if(zerou) {
 			this.aumentaQtdZeradas();
+			return 20;
 		}
 		
 		this.aumentaQtdJogadas();
 		
 		return 0;
+	}
+	
+	@Override
+	public String toString() {
+		return infoJogo("Plataforma");
 	}
 }

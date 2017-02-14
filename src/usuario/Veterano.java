@@ -1,4 +1,6 @@
-package lab06;
+package usuario;
+
+import jogo.Jogo;
 
 public class Veterano extends Usuario {
 
@@ -7,8 +9,13 @@ public class Veterano extends Usuario {
 	}
 	
 	public void registraJogada(String nomeDoJogo, int score, boolean zerou) {
-		Jogo jogo = this.jogosComprados.get(nomeDoJogo);
+		Jogo jogo = this.getJogo(nomeDoJogo);
 		int pontuacao = jogo.registraJogada(score, zerou);
-		this.x2p += (15 * (int)jogo.getPreco()) + pontuacao;
+		this.setX2p(this.getX2p() + (15 * (int)jogo.getPreco()) + pontuacao);
+	}
+	
+	@Override
+	public String toString() {
+		return infoUsuario("Veterano");
 	}
 }

@@ -1,6 +1,7 @@
-package lab06;
+package jogo;
 
 public abstract class Jogo {
+	private final String NL = System.lineSeparator();
 	private String nome;
 	private double preco;
 	private int maiorScore;
@@ -47,6 +48,16 @@ public abstract class Jogo {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public String infoJogo(String tipoJogo) {
+		String infoJogo = "";
+		infoJogo += "+ " + nome + " - " + tipoJogo + ":" + NL;
+		infoJogo += "==> Jogou " + qtdJogadas + "vez(es)" + NL;
+		infoJogo += "==> Zerou " + qtdZeradas + "vez(es)" + NL;
+		infoJogo += "==> Maior score: " + maiorScore + NL;
+		
+		return infoJogo;
 	}
 	
 }
