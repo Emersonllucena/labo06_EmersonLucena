@@ -13,6 +13,14 @@ public class Noob extends Usuario {
 		int pontuacao = jogo.registraJogada(score, zerou);
 		this.setX2p(this.getX2p() + (10 * (int)jogo.getPreco()) + pontuacao);
 	}
+	
+	public boolean compraJogo(Jogo jogo) {
+		if(this.getSaldo() > jogo.getPreco() * 0.9) return false;
+		
+		this.setSaldo(this.getSaldo() - jogo.getPreco() * 0.9);
+		this.adicionaJogo(jogo);
+		return true;
+	}
 
 	@Override
 	public String toString() {

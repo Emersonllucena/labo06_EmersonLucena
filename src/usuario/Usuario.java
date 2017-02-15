@@ -6,8 +6,8 @@ import java.util.Map;
 import jogo.Jogo;
 
 public abstract class Usuario {
+
 	public final String NL = System.lineSeparator();
-	//TODO metodos protected
 	private String nome;
 	private String login;
 	private double saldo;
@@ -24,6 +24,8 @@ public abstract class Usuario {
 	}
 	
 	public abstract void registraJogada(String nomeDoJogo, int score, boolean zerou);
+	
+	public abstract boolean compraJogo(Jogo jogo);
 	
 	public void adicionaJogo(Jogo jogo) {
 		jogosComprados.put(jogo.getNome(), jogo);
@@ -70,8 +72,16 @@ public abstract class Usuario {
 			totalPreco += jogo.getPreco();
 		}
 		
-		infoUsuario += NL + "Total de preço dos jogos: R$ " + totalPreco + NL;
+		infoUsuario += NL + "Total de preco dos jogos: R$ " + totalPreco + NL;
 		
 		return infoUsuario;
+	}
+
+	public Map<String, Jogo> getJogosComprados() {
+		return jogosComprados;
+	}
+	
+	public void setJogosComprados(Map<String, Jogo> jogosComprados) {
+		this.jogosComprados = jogosComprados;
 	}
 }
