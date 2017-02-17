@@ -2,7 +2,7 @@ package jogo;
 
 public class JogoLuta extends Jogo {
 	
-	public JogoLuta(String nome, double preco) {
+	public JogoLuta(String nome, double preco) throws Exception {
 		super(nome, preco);
 	}
 
@@ -21,8 +21,7 @@ public class JogoLuta extends Jogo {
 		return 0;
 	}
 
-	@Override
-	public String toString() {
-		return infoJogo("Luta");
+	public String infoJogo() {
+		return super.infoJogo("Luta");
 	}
 }

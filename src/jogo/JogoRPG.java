@@ -2,7 +2,7 @@ package jogo;
 
 public class JogoRPG extends Jogo {
 	
-	public JogoRPG(String nome, double preco) {
+	public JogoRPG(String nome, double preco) throws Exception {
 		super(nome, preco);
 	}
 
@@ -20,8 +20,7 @@ public class JogoRPG extends Jogo {
 		return 10;
 	}
 	
-	@Override
-	public String toString() {
-		return infoJogo("RPG");
+	public String infoJogo() {
+		return super.infoJogo("RPG");
 	}
 }

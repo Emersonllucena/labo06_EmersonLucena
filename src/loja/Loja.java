@@ -3,6 +3,10 @@ package loja;
 import java.util.HashMap;
 import java.util.Map;
 
+import excecoes.ArgumentoNuloExcecao;
+import excecoes.EntradaInvalidaExcecao;
+import excecoes.UpgradeExcecao;
+import excecoes.ValorInvalidoExcecao;
 import jogo.*;
 import usuario.*;
 
@@ -14,9 +18,13 @@ public class Loja {
 		usuarios = new HashMap<>();
 	}
 	
-	public void upgrade(String login) {
-		//TODO adicionar exception - ja veterano ou sem pontuacao
+	public void upgrade(String login) throws Exception {
+		if(!validaString(login)) throw new EntradaInvalidaExcecao();
+		
 		Usuario usuario = usuarios.get(login);
+		if(usuario == null) throw new ArgumentoNuloExcecao("usuario nao encontrado");
+		if(!usuario.podeFazerUpgrade()) throw new UpgradeExcecao();
+		
 		usuarios.remove(login);
 		
 		String nome = usuario.getNome();
@@ -24,25 +32,32 @@ public class Loja {
 		int x2p = usuario.getX2p();
 		Map<String, Jogo> jogosComprados = usuario.getJogosComprados();
 		
-		Usuario usuarioUpgrade = new Veterano(nome, login);
-		usuarioUpgrade.setSaldo(saldo);
-		usuarioUpgrade.setX2p(x2p);
-		usuarioUpgrade.setJogosComprados(jogosComprados);
-		
+		Usuario usuarioUpgrade = new Veterano(nome, login, saldo, x2p, jogosComprados);
 		usuarios.put(login, usuarioUpgrade);
 	}
 	
-	public void adicionaUsuario(Usuario usuario) {
+	public void adicionaUsuario(Usuario usuario) throws ArgumentoNuloExcecao {
+		if(usuario == null) throw new ArgumentoNuloExcecao("usuario nao pode ser null");	
 		usuarios.put(usuario.getLogin(), usuario);	
 	}
 	
-	public void adicionaDinheiro(String login, int qtdDinheiro) {
+	public void adicionaDinheiro(String login, int qtdDinheiro) throws Exception {
+		if(!validaString(login)) throw new EntradaInvalidaExcecao();
 		Usuario usuario = usuarios.get(login);
+		
+		if(usuario == null) throw new ArgumentoNuloExcecao("usuario nao encontrado");
+		if(qtdDinheiro <= 0) throw new ValorInvalidoExcecao();
+		
 		usuario.setSaldo(usuario.getSaldo() + qtdDinheiro);
 	}
 	
-	public boolean vendeJogo(String login, Jogo jogo) {
+	public boolean vendeJogo(String login, Jogo jogo) throws Exception {
+		if(!validaString(login)) throw new EntradaInvalidaExcecao();
+		
 		Usuario usuario = usuarios.get(login);
+		if(usuario == null) throw new ArgumentoNuloExcecao("usuario nao encontrado");
+		if(jogo == null) throw new ArgumentoNuloExcecao("jogo nao pode ser nulo");
+		
 		return usuario.compraJogo(jogo);
 	}
 	
@@ -58,5 +73,10 @@ public class Loja {
 		infoUsuarios += "--------------------------------------------" + NL;
 		
 		return infoUsuarios;
+	}
+	
+	public boolean validaString(String str) {
+		if(str == null || str.trim().equals("")) return false;
+		return true;
 	}
 }
