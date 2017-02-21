@@ -29,7 +29,7 @@ public abstract class Jogo {
 		this.estilosJogo = new HashSet<>();
 	}
 	
-	public Jogo(String nome, double preco, HashSet <Jogabilidade> estilosJogo) throws Exception {
+	public Jogo(String nome, double preco, Set <Jogabilidade> estilosJogo) throws Exception {
 		this(nome, preco);
 		if(estilosJogo == null) throw new ArgumentoNuloExcecao("estilosJogo nao pode ser null");
 		this.estilosJogo = estilosJogo;
@@ -73,12 +73,16 @@ public abstract class Jogo {
 		if(str == null || str.trim().equals("")) return false;
 		return true;
 	}
+	
+	public Set<Jogabilidade> getEstilosJogo() {
+		return estilosJogo;
+	}
 
 	public String infoJogo(String tipoJogo) {
 		String infoJogo = "";
 		infoJogo += "+ " + nome + " - " + tipoJogo + ":" + NL;
-		infoJogo += "==> Jogou " + qtdJogadas + "vez(es)" + NL;
-		infoJogo += "==> Zerou " + qtdZeradas + "vez(es)" + NL;
+		infoJogo += "==> Jogou " + qtdJogadas + " vez(es)" + NL;
+		infoJogo += "==> Zerou " + qtdZeradas + " vez(es)" + NL;
 		infoJogo += "==> Maior score: " + maiorScore + NL;
 		
 		return infoJogo;

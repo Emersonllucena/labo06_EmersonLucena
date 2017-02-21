@@ -1,26 +1,33 @@
 package jogo;
 
+import java.util.Set;
+
 public class JogoRPG extends Jogo {
 	
 	public JogoRPG(String nome, double preco) throws Exception {
 		super(nome, preco);
 	}
+	
+	public JogoRPG(String nome, double preco,  Set <Jogabilidade> estilosJogo) throws Exception {
+		super(nome, preco, estilosJogo);
+	}
 
 	@Override
 	public int registraJogada(int pontuacao, boolean zerou) {
-		if(this.getMaiorScore() < pontuacao) {
-			this.setMaiorScore(pontuacao);
-		}
+		this.aumentaQtdJogadas();
+		
 		if(zerou) {
 			this.aumentaQtdZeradas();
 		}
-		
-		this.aumentaQtdJogadas();
+		if(this.getMaiorScore() < pontuacao) {
+			this.setMaiorScore(pontuacao);
+		}
 		
 		return 10;
 	}
 	
-	public String infoJogo() {
+	@Override
+	public String toString() {
 		return super.infoJogo("RPG");
 	}
 }

@@ -22,15 +22,17 @@ public class Noob extends Usuario {
 		if(jogo == null) throw new ArgumentoNuloExcecao("jogo nao pode ser null");
 		
 		int pontuacao = jogo.registraJogada(score, zerou);
-		this.setX2p(this.getX2p() + (10 * (int)jogo.getPreco()) + pontuacao);
+		this.setX2p(this.getX2p() + pontuacao);
 	}
 	
 	public boolean compraJogo(Jogo jogo) throws ArgumentoNuloExcecao {
 		if(jogo == null) throw new ArgumentoNuloExcecao("jogo nao pode ser null");
 		
-		if(this.getSaldo() > jogo.getPreco() * 0.9) return false;
+		if(this.getSaldo() < jogo.getPreco() * 0.9) return false;
 		
 		this.setSaldo(this.getSaldo() - jogo.getPreco() * 0.9);
+		this.setX2p(this.getX2p() + (int)jogo.getPreco() * 10);
+		
 		this.adicionaJogo(jogo);
 		return true;
 	}
